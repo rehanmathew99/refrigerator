@@ -1,4 +1,5 @@
 library(dplyr)
+library(caret)
 #Performing the EDA in the data set
 #Understanding the data set 
 summary(Refrigerator)
@@ -9,7 +10,7 @@ numericvalues
 #We have found out those columns which has numeric values in the data set
 vari = select(Refrigerator, ECOST, RSIZE,FEATURES)
 vari
-#We have selected those variables that influnces the pricing of the refrigerator according to our research statement
+#We have selected those variables that influences the pricing of the refrigerator according to our research statement
 brand = rename(Refrigerator, BRANDNAME=BRANDNAM)
 brand   
 #We have renamed the column 'BRANDNAM' to 'BRANDNAME' 
@@ -39,6 +40,22 @@ boxplot(Refrigerator$FEATURES, main="features box plot",ylab="features")
 #Relationship  analysis
 #After cleaning the data set by  removing the unwanted variables and values we can now find the relationshio analysis of the data set.
 #To find the relationship of the variables we can use the correlation analysis 
+install.packages(corrplot)
+library(corrplot)
+data(refrigerator)
+corr= cor(Refrigerator[,(1:7)])
+corr
+corrplot(corr, method= "pie")
+corrplot(corr, method= "color")
+corrplot(corr, method= "number")
+head(round(corr,1))
+
+corrplot(corr, type = "upper")
+
+corrplot(corr, type= "lower")
+
+corrplot(corr, type = "upper", col= c("black", "red"), bg= "blue")
+
 cor(Refrigerator$PRICE,Refrigerator$ECOST)
 #There is positive relation between the Price and ECOST of refrigerator.
 cor(Refrigerator$PRICE,Refrigerator$RSIZE)
@@ -47,6 +64,7 @@ cor(Refrigerator$PRICE,Refrigerator$FEATURES)
  #There is positive relation between the Price and Features of refrigerator.
 
 #Visualization
+library(ggplot2)
 plot(Refrigerator$PRICE,Refrigerator$ECOST)
 abline(lm(Refrigerator$ECOST~Refrigerator$PRICE),col="blue")
 #By plotting scatter plot we are able to understand the relationship between Price and ECOST of refrigerator.
