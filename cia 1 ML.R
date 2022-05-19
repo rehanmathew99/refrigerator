@@ -79,13 +79,18 @@ boxplot(Refrigerator$PRICE,  main = "PRICE  Box Plot", ylab = "PRICE")
 #Regression Analysis
 simplereg = lm(PRICE~ECOST, data=Refrigerator)
 summary(simplereg)
+plot(simplereg)
 #After finding simple regression of PRICE and ECOST we were able to find out that the p value is less than 0.05 which is acceptable and significant.There exits a linear relationship between the identified variables.
 simplereg = lm(PRICE~RSIZE, data=Refrigerator)
 summary(simplereg)
+plot(simplereg)
 #After finding simple regression of PRICE and RSIZE we were able to find out that the p value is greater than 0.05 which is not acceptable and does not have significance.There does not exits a linear relationship between the identified variables.
 simplereg = lm(PRICE~FEATURES, data=Refrigerator)
 summary(simplereg)
+plot(simplereg)
 #After finding simple regression of PRICE and Features we were able to find out that the p value is greater than 0.05 which is not acceptable and does not have significance.There does not exits a linear relationship between the identified variables.
 multireg = lm(PRICE~ECOST+RSIZE+FEATURES, data=Refrigerator)
 summary(multireg)
+plot(multireg)
+
 #After finding multiple regression we were able to find out that the p value is greater than 0.05 which is not acceptable and does not have significance.There does not exits a linear relationship between the identified variables.
