@@ -42,7 +42,6 @@ boxplot(Refrigerator$FEATURES, main="features box plot",ylab="features")
 #To find the relationship of the variables we can use the correlation analysis 
 install.packages(corrplot)
 library(corrplot)
-data(refrigerator)
 corr= cor(Refrigerator[,(1:7)])
 corr
 corrplot(corr, method= "pie")
@@ -87,4 +86,6 @@ summary(simplereg)
 simplereg = lm(PRICE~FEATURES, data=Refrigerator)
 summary(simplereg)
 #After finding simple regression of PRICE and Features we were able to find out that the p value is greater than 0.05 which is not acceptable and does not have significance.There does not exits a linear relationship between the identified variables.
-
+multireg = lm(PRICE~ECOST+RSIZE+FEATURES, data=Refrigerator)
+summary(multireg)
+#After finding multiple regression we were able to find out that the p value is greater than 0.05 which is not acceptable and does not have significance.There does not exits a linear relationship between the identified variables.
