@@ -64,6 +64,10 @@ cor(Refrigerator$PRICE,Refrigerator$FEATURES)
 
 #Visualization
 library(ggplot2)
+ggplot = ggplot()
+ggplot = ggplot + geom_point(data = reformulate(), aes(x = PRICE, y = ECOST))
+ggplot
+
 plot(Refrigerator$PRICE,Refrigerator$ECOST)
 abline(lm(Refrigerator$ECOST~Refrigerator$PRICE),col="blue")
 #By plotting scatter plot we are able to understand the relationship between Price and ECOST of refrigerator.
@@ -75,6 +79,45 @@ abline(lm(Refrigerator$FEATURES~Refrigerator$PRICE),col="blue")
 #By plotting scatter plot we are able to understand the relationship between Price and Features of refrigerator.
 boxplot(Refrigerator$PRICE,  main = "PRICE  Box Plot", ylab = "PRICE")
 #By visualizing the box plot we are able to identify the outliers present in the price variable
+
+#Pareto Chart of Price
+library(qcc)
+freq_distribution=table(Refrigerator$PRICE)
+freq_distribution
+cnt_distinct = length(freq_distribution)
+cnt_distinct
+pareto.chart(freq_distribution, main = "Price Pareto Chart", xlab = "Price", ylab = "Frequency", col = topo.colors(cnt_distinct))
+abline(h = sum(freq_distribution) * 0.8, col = "red", lwd = 2)
+
+#Histogram of ECOST
+freq_distribution=table(Refrigerator$ECOST)
+freq_distribution
+cnt_distinct = length(freq_distribution)
+cnt_distinct
+hist(Refrigerator$ECOST, main = "ECOST HISTOGRAM", xlab = "ECOST", ylab = "Frequency", col = "orange")
+
+#Bar Plot of RSIZE
+freq_distribution=table(Refrigerator$RSIZE)
+freq_distribution
+cnt_distinct = length(freq_distribution)
+cnt_distinct
+pie_cnt = table(Refrigerator$RSIZE)
+b = barplot(pie_cnt, main = "RSIZE Bar Plot", beside = T)
+text(x = b, as.data.frame(pie_cnt)[,2]+3, format(as.data.frame(pie_cnt)[,2]), xpd = T, pos = 3, cex = 0.5)
+grid()
+box()
+
+#Pie Chart of FEATURES
+freq_distribution=table(Refrigerator$FEATURES)
+freq_distribution
+cnt_distinct = length(freq_distribution)
+cnt_distinct
+pie_cnt = table(Refrigerator$FEATURES)
+pie_pct = pie_cnt * 100 / sum(pie_cnt)
+pie_lbl = paste(pie_pct, "%", sep = ";")
+pie_lbl = paste(row.names(pie_pct), pie_lbl, sep = "\n")
+pie(pie_cnt, main = "FEATURES Pie Distribution", labels = pie_lbl)
+box()
 
 #Regression Analysis
 simplereg = lm(PRICE~ECOST, data=Refrigerator)
