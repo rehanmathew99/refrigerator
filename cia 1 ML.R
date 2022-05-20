@@ -64,10 +64,6 @@ cor(Refrigerator$PRICE,Refrigerator$FEATURES)
 
 #Visualization
 library(ggplot2)
-ggplot = ggplot()
-ggplot = ggplot + geom_point(data = reformulate(), aes(x = PRICE, y = ECOST))
-ggplot
-
 plot(Refrigerator$PRICE,Refrigerator$ECOST)
 abline(lm(Refrigerator$ECOST~Refrigerator$PRICE),col="blue")
 #By plotting scatter plot we are able to understand the relationship between Price and ECOST of refrigerator.
